@@ -15,7 +15,6 @@ env/
 .idea/
 
 # Ignorar archivos de datos grandes
-*.csv
 *.h5
 
 # Ignorar archivos temporales
