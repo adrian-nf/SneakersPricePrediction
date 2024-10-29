@@ -9,8 +9,6 @@ model_path = "./models/model1.pkl"
 
 TRAIN_COLS = ['Order Date', 'Retail Price', 'Release Date', 'Shoe Size', 'Order Year', 'Order Month', 'Order Day', 'Order Day of Week', 'Release Year', 'Release Month', 'Release Day', 'Release Day of Week', 'Brand_Adidas', 'Brand_Nike', 'Sub-brand_Air Jordan', 'Sub-brand_Yeezy', 'Product Line_Air Max', 'Product Line_Air Presto', 'Product Line_Air VaporMax', 'Product Line_Blazer Mid', 'Product Line_Boost', 'Product Line_Flyknit', 'Product Line_Mercurial', 'Product Line_Retro', 'Product Line_Zoom Fly', 'Model_1', 'Model_350', 'Model_90', 'Model_97', 'Version_2pt0', 'Version_V2', 'Height_High', 'Height_Low', 'Collaboration_Off White', 'Color_Oxford Tan', 'Color_Eve', 'Color_AF100', 'Color_Hallows', 'Color_White', 'Color_Chicago', 'Color_Elemental', 'Color_Queen', 'Color_Black-White', 'Color_Copper', 'Color_Blue Tint', 'Color_Frozen', 'Color_Black', 'Color_Yellow', 'Color_Menta', 'Color_All', 'Color_Zebra', 'Color_Turtledove', 'Color_Moonrock', 'Color_Semi', 'Color_Total-Orange', 'Color_Air', 'Color_Sesame', 'Color_Pink', 'Color_Pirate Black', 'Color_Green', 'Color_Beluga', 'Color_Wolf Grey', 'Color_Force', 'Color_Grim Reaper', 'Color_University Blue', 'Color_Black-Silver', 'Color_Desert Ore', 'Color_Red', 'Color_Cream White', 'Color_Core', 'Color_Rose', 'Color_Volt']
 
-
-# Constants
 USA_STATES = [
     "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
     "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
@@ -86,6 +84,9 @@ def predict_shoe_data(
     if not retail_price or not release_date or not shoe_size or not brand:
         return "Error: Por favor completa todos los campos obligatorios."
 
+    # Convierte la lista de colores seleccionados en una cadena unificada
+    color = ', '.join(color) if color else None
+
     data = {
         "Retail Price": [retail_price],
         "Order Date": [order_date],
@@ -111,8 +112,6 @@ def predict_shoe_data(
     except Exception as e:
         return f"Error en la predicción: {e}"
 
-
-
 iface = gr.Interface(
     fn=predict_shoe_data,
     inputs=[
@@ -128,13 +127,12 @@ iface = gr.Interface(
         gr.Dropdown(label="Version", choices=VERSIONS),
         gr.Dropdown(label="Height", choices=HEIGHTS),
         gr.Dropdown(label="Collaboration", choices=COLLABORATIONS),
-        gr.Dropdown(label="Color(s)", choices=COLORS),
+        gr.Dropdown(label="Color(s)", choices=COLORS, multiselect=True),
     ],
     outputs="text",
     title="Shoe Product Prediction Form",
     description="Complete los campos para predecir el resultado usando el modelo."
 )
 
-
 if __name__ == "__main__":
-    iface.launch(inbrowser=True, share=True)
+    iface.launch(inbrowser=True)
