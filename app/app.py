@@ -5,6 +5,10 @@ import numpy as np
 import pickle
 from sklearn.preprocessing import StandardScaler
 import xgboost
+import logging
+
+# Configurar logging
+logging.basicConfig(level=logging.INFO)
 
 model_path = "./models/model1.pkl"
 scaler_path = "./data/scaler.pkl"
@@ -152,4 +156,4 @@ iface = gr.Interface(
 )
 
 if __name__ == "__main__":
-    iface.launch(inbrowser=True)
+    iface.launch(inbrowser=True, server_port=7861)
