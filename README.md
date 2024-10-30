@@ -20,7 +20,8 @@ Definimos el problema de predicción de precios y rentabilidad en el mercado de 
 Utilizamos un conjunto de datos de StockX que incluye aproximadamente 100,000 transacciones de zapatillas. El dataset contiene información sobre el modelo, fecha de venta, precio de venta, talla y precio original.
 
 ### Métricas de Evaluación
-Se definieron las métricas de evaluación, como el **Raíz del Error Cuadrático Medio (RMSE)** , el  **Error cuadrático medio (MSE)** , el **Error Absoluto Medio (MAE)** y el **Coeficiente de Determinación (R<sup>2</sup>)**. Además, se separaron los datos en conjuntos de **entrenamiento** , **prueba** y **validación** para validar la efectividad de los modelos.
+Se definieron las métricas de evaluación, como la **Raíz del Logaritmo del Error Cuadrático Medio (RMSLE)**, el **Raíz del Error Cuadrático Medio (RMSE)**, el **Error Absoluto Medio (MAE)** y el **Coeficiente de Determinación (R<sup>2</sup>)**. Además, se separaron los datos en conjuntos de **entrenamiento**, **prueba** y **validación** para validar la efectividad de los modelos.
+
 
 
 
