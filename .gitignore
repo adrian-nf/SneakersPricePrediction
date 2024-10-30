@@ -16,7 +16,6 @@ env/
 
 # Ignorar archivos de datos grandes
 *.h5
-*.pkl
 
 # Ignorar archivos temporales
 *.tmp
