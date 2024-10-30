@@ -26,4 +26,8 @@ env/
 .DS_Store
 Thumbs.db
 
+# Ignorar carpeta gradio
 .gradio/
+
+# Ignorar carpeta generada por CatBoost
+catboost_info/
