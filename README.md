@@ -132,4 +132,43 @@ El modelo se implementó en producción utilizando **Gradio** para crear una int
 
 
 
-## Instalación
+## Instalación sin Docker
+
+Para crear un entorno virtual, instalar los requisitos y ejecutar la aplicación, sigue estos pasos:
+
+1. Crear un entorno virtual:
+```bash
+python3 -m venv venv
+```
+
+2. Activar el entorno virtual:
+```bash
+source venv/bin/activate  # En macOS/Linux
+# .\venv\Scripts\activate  # En Windows
+```
+
+3. Instalar los requisitos:
+```bash
+pip install -r requirements.txt
+```
+
+4. Ejecutar la aplicación:
+```bash
+python app/app.py
+```
+
+## Instalación con Docker
+
+Para ejecutar la aplicación utilizando Docker, sigue estos pasos:
+
+1. Construir la imagen de Docker:
+    ```bash
+    docker build -t shoe-price-prediction .
+    ```
+
+2. Ejecutar el contenedor:
+    ```bash
+    docker run -p 7860:7860 shoe-price-prediction
+    ```
+
+Una vez que el contenedor esté en ejecución, puedes acceder a la aplicación en [http://localhost:7860](http://localhost:7860).
