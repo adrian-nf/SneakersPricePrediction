@@ -3,13 +3,40 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 import pickle
-from sklearn.preprocessing import StandardScaler
+import warnings
+
+warnings.filterwarnings("ignore", category=UserWarning)
 
 
 model_path = "./models/model1.pkl"
 scaler_path = "./data/scaler.pkl"
 
-TRAIN_COLS = ['Order Date', 'Retail Price', 'Release Date', 'Shoe Size', 'Order Year', 'Order Month', 'Order Day', 'Order Day of Week', 'Release Year', 'Release Month', 'Release Day', 'Release Day of Week', 'Brand_Adidas', 'Brand_Nike', 'Sub-brand_Air Jordan', 'Sub-brand_Yeezy', 'Product Line_Air Max', 'Product Line_Air Presto', 'Product Line_Air VaporMax', 'Product Line_Blazer Mid', 'Product Line_Boost', 'Product Line_Flyknit', 'Product Line_Mercurial', 'Product Line_Retro', 'Product Line_Zoom Fly', 'Model_1', 'Model_350', 'Model_90', 'Model_97', 'Version_2pt0', 'Version_V2', 'Height_High', 'Height_Low', 'Collaboration_Off White', 'Color_Oxford Tan', 'Color_Eve', 'Color_AF100', 'Color_Hallows', 'Color_White', 'Color_Chicago', 'Color_Elemental', 'Color_Queen', 'Color_Black-White', 'Color_Copper', 'Color_Blue Tint', 'Color_Frozen', 'Color_Black', 'Color_Yellow', 'Color_Menta', 'Color_All', 'Color_Zebra', 'Color_Turtledove', 'Color_Moonrock', 'Color_Semi', 'Color_Total-Orange', 'Color_Air', 'Color_Sesame', 'Color_Pink', 'Color_Pirate Black', 'Color_Green', 'Color_Beluga', 'Color_Wolf Grey', 'Color_Force', 'Color_Grim Reaper', 'Color_University Blue', 'Color_Black-Silver', 'Color_Desert Ore', 'Color_Red', 'Color_Cream White', 'Color_Core', 'Color_Rose', 'Color_Volt']
+TRAIN_COLS = [
+    'Order Date', 'Retail Price', 'Release Date', 'Shoe Size', 'Order Year', 
+    'Order Month', 'Order Day', 'Order Day of Week', 'Release Year', 
+    'Release Month', 'Release Day', 'Release Day of Week', 'Brand_Adidas', 
+    'Brand_Nike', 'Sub-brand_Air Jordan', 'Sub-brand_Yeezy', 
+    'Product Line_Air Max', 'Product Line_Air Presto', 
+    'Product Line_Air VaporMax', 'Product Line_Blazer Mid', 
+    'Product Line_Boost', 'Product Line_Flyknit', 
+    'Product Line_Mercurial', 'Product Line_Retro', 
+    'Product Line_Zoom Fly', 'Model_1', 'Model_350', 
+    'Model_90', 'Model_97', 'Version_2pt0', 'Version_V2', 
+    'Height_High', 'Height_Low', 'Collaboration_Off White', 
+    'Color_AF100', 'Color_Elemental', 'Color_Green', 
+    'Color_Frozen', 'Color_Moonrock', 'Color_Zebra', 
+    'Color_University Blue', 'Color_Air', 'Color_Menta', 
+    'Color_Semi', 'Color_White', 'Color_Black-Silver', 
+    'Color_Black-White', 'Color_Cream White', 'Color_All', 
+    'Color_Volt', 'Color_Beluga', 'Color_Pink', 
+    'Color_Queen', 'Color_Eve', 'Color_Black', 
+    'Color_Oxford Tan', 'Color_Pirate Black', 'Color_Total-Orange', 
+    'Color_Yellow', 'Color_Rose', 'Color_Hallows', 
+    'Color_Turtledove', 'Color_Chicago', 'Color_Core', 
+    'Color_Copper', 'Color_Force', 'Color_Sesame', 
+    'Color_Desert Ore', 'Color_Wolf Grey', 'Color_Blue Tint', 
+    'Color_Grim Reaper', 'Color_Red'
+]
 
 USA_STATES = [
     "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
@@ -29,12 +56,16 @@ VERSIONS = [None, "V2", "2pto"]
 HEIGHTS = [None, "High", "Low"]
 COLLABORATIONS = [None, "off-white"]
 COLORS = [
-    None, 'Beluga', 'Core Black Copper', 'Core Black Green', 'Core Black Red', 'Core Black White',
-    'Cream White', 'Zebra', 'Moonrock', 'Pirate Black', 'Oxford Tan', 'Turtledove',
-    'Semi Frozen Yellow', 'Blue Tint', 'Black', 'Desert Ore', 'Elemental Rose Queen',
-    'All Hallows Eve', 'Grim Reaper', 'Sesame', 'Wolf Grey', 'Menta', 'Black Silver',
-    'Pink', 'Volt', 'Butter', 'Static', 'Static Reflective', 'Chicago', 'University Blue',
-    'White', 'Black-White', 'Black-Silver', 'Total-Orange'
+    'AF100', 'Elemental', 'Green', 'Frozen', 'Moonrock',
+    'Zebra', 'University Blue', 'Air', 'Menta',
+    'Semi', 'White', 'Black-Silver', 'Black-White',
+    'Cream White', 'All', 'Volt', 'Beluga',
+    'Pink', 'Queen', 'Eve', 'Black',
+    'Oxford Tan', 'Pirate Black', 'Total-Orange',
+    'Yellow', 'Rose', 'Hallows', 'Turtledove',
+    'Chicago', 'Core', 'Copper', 'Force',
+    'Sesame', 'Desert Ore', 'Wolf Grey',
+    'Blue Tint', 'Grim Reaper', 'Red'
 ]
 
 with open(model_path, 'rb') as file:
