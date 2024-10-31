@@ -12,7 +12,7 @@ COPY ./data ./data
 RUN pip install -r requirements.txt
 
 # Expose the port
-EXPOSE 7861
 EXPOSE 7860
+ENV GRADIO_SERVER_NAME="0.0.0.0"
 
 ENTRYPOINT ["python", "app.py"]
