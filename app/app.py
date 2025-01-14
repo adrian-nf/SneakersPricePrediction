@@ -178,7 +178,7 @@ iface = gr.Interface(
         gr.Dropdown(label="Color(s)", choices=COLORS, multiselect=True),
     ],
     outputs="text",
-    title="Shoe Product Prediction Form",
+    title="Sneakers Price Prediction",
     description="Complete los campos para predecir el resultado usando el modelo."
 )
 
